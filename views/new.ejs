@@ -1,0 +1,41 @@
+<%- include("partials/header") %>
+
+<div class="container">
+  <h2 class="mb-4 fw-bold">Add New Book</h2>
+
+  <form action="/books" method="POST" class="card p-4 shadow-lg animate-fade">
+      <div class="mb-3">
+          <label class="form-label">Title</label>
+          <input class="form-control" type="text" name="title" required>
+      </div>
+
+      <div class="mb-3">
+          <label class="form-label">Author</label>
+          <input class="form-control" type="text" name="author" required>
+      </div>
+
+      <div class="mb-3">
+          <label class="form-label">ISBN (optional)</label>
+          <input class="form-control" type="text" name="isbn">
+      </div>
+
+      <div class="mb-3">
+          <label class="form-label">OpenLibrary ID</label>
+          <input class="form-control" type="text" name="openlibrary_id">
+      </div>
+
+      <div class="mb-3">
+          <label class="form-label">Rating (0-5)</label>
+          <input class="form-control" type="number" min="0" max="5" name="rating">
+      </div>
+
+      <div class="mb-3">
+          <label class="form-label">Review</label>
+          <textarea class="form-control" name="review"></textarea>
+      </div>
+
+      <button class="btn btn-primary">Add Book</button>
+  </form>
+</div>
+
+<%- include("partials/footer") %>

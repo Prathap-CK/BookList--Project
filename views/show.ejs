@@ -1,0 +1,28 @@
+<%- include("partials/header") %>
+
+<div class="card shadow-lg p-4 animate__animated animate__fadeIn">
+  <div class="row">
+
+    <div class="col-md-4">
+      <img src="<%= book.cover_url %>" class="img-fluid rounded" alt="Cover">
+    </div>
+
+    <div class="col-md-8">
+      <h2><%= book.title %></h2>
+      <p><strong>Author:</strong> <%= book.author %></p>
+      <p><strong>Rating:</strong> ⭐ <%= book.rating %></p>
+
+      <h4>Review</h4>
+      <p><%= book.review || "No review added." %></p>
+
+      <a href="/books/<%= book.id %>/edit" class="btn btn-warning">✏ Edit</a>
+
+      <form action="/books/<%= book.id %>?_method=DELETE" method="POST" class="d-inline">
+        <button type="submit" class="btn btn-danger">🗑 Delete</button>
+      </form>
+    </div>
+
+  </div>
+</div>
+
+<%- include("partials/footer") %>

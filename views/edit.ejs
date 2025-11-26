@@ -1,0 +1,25 @@
+<%- include ("partials/header")%>
+<h2>Edit Book</h2>
+
+<form action="/books/<%= book.id %>?_method=PUT" method="POST">
+    <label>Title:</label>
+    <input type="text" name="title" value="<%= book.title %>" required>
+    <label>Author:</label>
+    <input type="text" name="author" value="<%= book.author %>" required>
+
+    <label>ISBN:</label>
+    <input type="text" name="isbn" value="<%= book.isbn %>">
+
+    <label>OpenLibrary ID:</label>
+    <input type="text" name="openlibrary_id" value="<%= book.openlibrary_id %>">
+
+    <label>Rating:</label>
+    <input type="number" name="rating" min="0" max="5" value="<%= book.rating %>">
+
+    <label>Review:</label>
+    <textarea name="review"><%= book.review %></textarea>
+
+    <button type="submit">Save Changes</button>
+</form>
+
+<%- include ("partials/footer") %>

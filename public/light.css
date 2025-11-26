@@ -1,0 +1,13 @@
+body {
+  background: #f9f9f9;
+  color: #222;
+  transition: 0.3s ease;
+}
+
+.card {
+  background: white;
+}
+
+header h1 a {
+  color: #222;
+}

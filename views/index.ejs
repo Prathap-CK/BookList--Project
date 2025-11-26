@@ -1,0 +1,28 @@
+<%- include("partials/header") %>
+
+<h2 class="mb-4 animate__animated animate__fadeInDown">All Books</h2>
+
+<!-- Sort Buttons -->
+<div class="mb-4">
+  <a href="/?sort=created_at_desc" class="btn btn-outline-primary btn-sm">Newest</a>
+  <a href="/?sort=created_at_asc" class="btn btn-outline-primary btn-sm">Oldest</a>
+  <a href="/?sort=rating_desc" class="btn btn-outline-primary btn-sm">Top Rated</a>
+  <a href="/?sort=rating_asc" class="btn btn-outline-primary btn-sm">Lowest Rated</a>
+</div>
+
+<!-- Book Grid -->
+<div class="book-grid">
+  <% books.forEach(book => { %>
+      <div class="book-card animate-fade">
+          <img src="<%= book.cover_url %>" class="book-img">
+          <div class="book-info">
+              <div class="book-title"><%= book.title %></div>
+              <div class="book-author">by <%= book.author %></div>
+              <div class="book-rating">⭐ <%= book.rating %></div>
+          </div>
+      </div>
+  <% }) %>
+</div>
+
+
+<%- include("partials/footer") %>
