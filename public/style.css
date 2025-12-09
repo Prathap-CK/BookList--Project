@@ -206,3 +206,26 @@ footer {
 [data-theme="dark"] form {
     box-shadow: 0 3px 15px rgba(255,255,255,0.06);
 }
+
+
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.book-info {
+  padding: 15px;
+}
+
+.book-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.book-author {
+  color: var(--muted);
+  margin-bottom: 5px;
+}
+

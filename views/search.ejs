@@ -1,0 +1,40 @@
+<%- include("partials/header") %>
+
+<h2 class="mb-4">Search results for "<%= query %>"</h2>
+
+<h4>Your Saved Books</h4>
+<div class="book-grid mb-5">
+  <% if (dbResults.length === 0) { %>
+    <p class="muted">No matching books in your collection.</p>
+  <% } %>
+
+  <% dbResults.forEach(book => { %>
+    <div class="book-card animate-fade">
+      <img src="<%= book.cover_url %>" class="book-img">
+      <div class="book-info">
+        <div class="book-title"><%= book.title %></div>
+        <div class="book-author">by <%= book.author %></div>
+        <div class="book-rating">⭐ <%= book.rating %></div>
+        <a href="/books/<%= book.id %>" class="btn btn-sm btn-primary mt-2">View</a>
+      </div>
+    </div>
+  <% }) %>
+</div>
+
+<h4>Books From OpenLibrary API</h4>
+<div class="book-grid">
+  <% apiResults.forEach(book => { %>
+    <div class="book-card animate-fade">
+      <img src="<%= book.cover_url %>" class="book-img">
+      <div class="book-info">
+        <div class="book-title"><%= book.title %></div>
+        <div class="book-author">by <%= book.author %></div>
+        <a href="/books/new" class="btn btn-sm btn-outline-success mt-2">
+          Add to My List
+        </a>
+      </div>
+    </div>
+  <% }) %>
+</div>
+
+<%- include("partials/footer") %>
