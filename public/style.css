@@ -229,3 +229,24 @@ footer {
   margin-bottom: 5px;
 }
 
+.rating {
+    cursor: pointer;
+    font-size: 28px;
+    color: #ccc;
+    user-select: none;
+}
+
+.rating .star {
+    transition: color .2s ease-in-out, transform .2s ease-in-out;
+}
+
+.rating .star:hover {
+    transform: scale(1.2);
+    color: gold;
+}
+
+.rating .star.selected {
+    color: gold;
+}
+
+

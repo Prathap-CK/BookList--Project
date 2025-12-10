@@ -25,9 +25,16 @@
       </div>
 
       <div class="mb-3">
-          <label class="form-label">Rating (0-5)</label>
-          <input class="form-control" type="number" min="0" max="5" name="rating">
-      </div>
+         <label>Rating:</label>
+<div class="rating">
+    <input type="hidden" name="rating" id="ratingValue" value="0">
+
+    <span class="star" data-val="1">★</span>
+    <span class="star" data-val="2">★</span>
+    <span class="star" data-val="3">★</span>
+    <span class="star" data-val="4">★</span>
+    <span class="star" data-val="5">★</span>
+</div>
 
       <div class="mb-3">
           <label class="form-label">Review</label>
