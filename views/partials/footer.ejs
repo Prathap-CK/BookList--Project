@@ -42,6 +42,27 @@
     });
 })();
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const stars = document.querySelectorAll(".rating .star");
+  const ratingValue = document.getElementById("ratingValue");
+
+  if (stars.length > 0) {
+    stars.forEach(star => {
+      star.addEventListener("click", function () {
+        const val = this.dataset.val;
+        ratingValue.value = val;
+
+        stars.forEach(s => s.classList.remove("selected"));
+        for (let i = 0; i < val; i++) {
+          stars[i].classList.add("selected");
+        }
+      });
+    });
+  }
+});
+</script>
+
 
 </body>
 </html>

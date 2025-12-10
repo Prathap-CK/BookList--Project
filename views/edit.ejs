@@ -14,7 +14,13 @@
     <input type="text" name="openlibrary_id" value="<%= book.openlibrary_id %>">
 
     <label>Rating:</label>
-    <input type="number" name="rating" min="0" max="5" value="<%= book.rating %>">
+    <div class="rating">
+    <input type="hidden" name="rating" id="ratingValue" value="<%= book.rating %>">
+
+    <% for(let i = 1; i <= 5; i++) { %>
+        <span class="star <%= i <= book.rating ? 'selected' : '' %>" data-val="<%= i %>">★</span>
+    <% } %>
+</div>
 
     <label>Review:</label>
     <textarea name="review"><%= book.review %></textarea>
