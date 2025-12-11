@@ -249,4 +249,16 @@ footer {
     color: gold;
 }
 
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 25px 0;
+}
+
+.page-info {
+    font-weight: bold;
+    color: var(--text);
+}
 

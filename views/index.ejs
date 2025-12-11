@@ -23,6 +23,18 @@
       </div>
   <% }) %>
 </div>
+<div class="pagination-container">
+  <% if (page > 1) { %>
+    <a href="/?page=<%= page - 1 %>&sort=<%= sort %>" class="btn btn-outline-secondary">Prev</a>
+  <% } %>
+
+  <span class="page-info">Page <%= page %> of <%= totalPages %></span>
+
+  <% if (page < totalPages) { %>
+    <a href="/?page=<%= page + 1 %>&sort=<%= sort %>" class="btn btn-outline-secondary">Next</a>
+  <% } %>
+</div>
+
 
 
 <%- include("partials/footer") %>

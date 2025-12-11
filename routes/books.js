@@ -19,15 +19,32 @@ function getCoverUrl({ isbn, openlibrary_id }, size = "L") {
 =========================== */
 router.get("/", async (req, res, next) => {
   try {
-    const sort = req.query.sort || "created_at_desc";
-    let orderSql = "created_at DESC";
+    const sort = req.query.sort || 'created_at_desc';
+    const page = parseInt(req.query.page) || 1;
+    const limit = 9;  // 9 books per page
+    const offset = (page - 1) * limit;
 
-    if (sort === "rating_desc") orderSql = "rating DESC, updated_at DESC";
-    if (sort === "rating_asc") orderSql = "rating ASC, updated_at DESC";
-    if (sort === "created_at_asc") orderSql = "created_at ASC";
+    let orderSql = 'created_at DESC';
+    if (sort === 'rating_desc') orderSql = 'rating DESC, updated_at DESC';
+    if (sort === 'rating_asc') orderSql = 'rating ASC, updated_at DESC';
+    if (sort === 'created_at_asc') orderSql = 'created_at ASC';
 
-    const result = await db.query(`SELECT * FROM books ORDER BY ${orderSql}`);
-    res.render("index", { books: result.rows, sort });
+    const booksQuery = await db.query(
+      `SELECT * FROM books ORDER BY ${orderSql} LIMIT $1 OFFSET $2`,
+      [limit, offset]
+    );
+
+    const countQuery = await db.query(`SELECT COUNT(*) FROM books`);
+    const totalBooks = parseInt(countQuery.rows[0].count);
+    const totalPages = Math.ceil(totalBooks / limit);
+
+    res.render('index', {
+      books: booksQuery.rows,
+      sort,
+      page,
+      totalPages
+    });
+
   } catch (err) {
     next(err);
   }
