@@ -13,6 +13,21 @@ app.set('trust proxy', 1);
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'views'));
 
+const session=require("express-session");
+const pgSession=require("connect-pg-simple")(session);
+const {pool}=require("./db");
+
+app.use(session({
+    store:new pgSession({
+        pool:pool,
+        tableName: 'session'
+    }),
+    secret: process.env.SESSION_SECRET || "supersecretkey",
+    resave:false,
+    saveUninitialized:false,
+    cookie :{maxAge : 7*24*60*60*1000}
+}));
+
 const bookRouter=require('./routes/books');
 app.use('/',bookRouter);
 app.use((req,res)=>{
