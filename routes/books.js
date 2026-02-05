@@ -1,7 +1,10 @@
 const express = require("express");
+const requiredLogin=require('../middleware/auth');
 const router = express.Router();
 const db = require("../db");
 const axios = require("axios");
+
+
 
 // Utility to build cover URLs
 function getCoverUrl({ isbn, openlibrary_id }, size = "L") {
@@ -53,14 +56,14 @@ router.get("/", async (req, res, next) => {
 /* ===========================
    NEW BOOK FORM
 =========================== */
-router.get("/books/new", (req, res) => {
+router.get("/books/new",requiredLogin, (req, res) => {
   res.render("new");
 });
 
 /* ===========================
    CREATE BOOK
 =========================== */
-router.post("/books", async (req, res, next) => {
+router.post("/books", requiredLogin,async (req, res, next) => {
   try {
     const { title, author, isbn, openlibrary_id, rating, review } = req.body;
     const cover_url = getCoverUrl({ isbn, openlibrary_id });
@@ -109,7 +112,7 @@ router.get("/books/:id", async (req, res, next) => {
 /* ===========================
    EDIT FORM
 =========================== */
-router.get("/books/:id/edit", async (req, res, next) => {
+router.get("/books/:id/edit",requiredLogin, async (req, res, next) => {
   try {
     const result = await db.query("SELECT * FROM books WHERE id=$1", [
       req.params.id,
@@ -123,7 +126,7 @@ router.get("/books/:id/edit", async (req, res, next) => {
 /* ===========================
    UPDATE BOOK
 =========================== */
-router.put("/books/:id", async (req, res, next) => {
+router.put("/books/:id", requiredLogin,async (req, res, next) => {
   try {
     const { title, author, isbn, openlibrary_id, rating, review } = req.body;
     const cover_url = getCoverUrl({ isbn, openlibrary_id });
@@ -162,7 +165,7 @@ router.put("/books/:id", async (req, res, next) => {
 /* ===========================
    DELETE BOOK
 =========================== */
-router.delete("/books/:id", async (req, res, next) => {
+router.delete("/books/:id", requiredLogin,async (req, res, next) => {
   try {
     await db.query("DELETE FROM books WHERE id=$1", [req.params.id]);
     res.redirect("/");
