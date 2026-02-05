@@ -14,15 +14,15 @@ router.post("/signup",async (req,res)=>{
     const hashed=await bcrypt.hash(password,10);
     await db.query(
         "INSERT INTO users (username,password) VALUES ($1,$2)",
-        [username,password]
+        [username,hashed]
 
     );
-    res,redirect("/login");
+    res.redirect("/login");
 }
 );
 
 router.get("/login",(req,res)=>{
-    res.render("/login");
+    res.render("login");
 })
 
 router.post("/login",async (req,res)=>{

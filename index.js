@@ -16,6 +16,10 @@ app.set('views',path.join(__dirname,'views'));
 const session=require("express-session");
 const pgSession=require("connect-pg-simple")(session);
 const {pool}=require("./db");
+app.use((req, res, next) => {
+  res.locals.session = req.session;
+  next();
+});
 
 app.use(session({
     store:new pgSession({
@@ -30,6 +34,9 @@ app.use(session({
 
 const bookRouter=require('./routes/books');
 app.use('/',bookRouter);
+
+const authRouter=require("./routes/auth");
+app.use(authRouter);
 app.use((req,res)=>{
     res.status(404).send('404 not found');
 })
@@ -37,6 +44,9 @@ app.use((err,req,res,next)=>{
     console.error("Server Error :",err);
     res.status(500).send('Something went wrong');
 });
+
+
+
 
 const PORT=process.env.PORT || 3000;
 app.listen(PORT,()=>{
