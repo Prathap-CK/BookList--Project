@@ -60,6 +60,18 @@ router.get("/books/new",requiredLogin, (req, res) => {
   res.render("new");
 });
 
+router.get("/my-books", requiredLogin, async (req, res, next) => {
+  try {
+    const result = await db.query(
+      "SELECT * FROM books WHERE user_id = $1 ORDER BY created_at DESC",
+      [req.session.user.id]
+    );
+
+    res.render("my-books", { books: result.rows });
+  } catch (err) {
+    next(err);
+  }
+});
 /* ===========================
    CREATE BOOK
 =========================== */
