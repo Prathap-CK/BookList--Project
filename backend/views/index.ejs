@@ -35,6 +35,21 @@
   <% } %>
 </div>
 
+<h2>My Books</h2>
+
+<% if (books.length === 0) { %>
+  <p>You haven't added any books yet.</p>
+<% } %>
+
+<ul>
+  <% books.forEach(book => { %>
+    <li>
+      <strong><%= book.title %></strong>
+      <a href="/books/<%= book.id %>">View</a>
+    </li>
+  <% }) %>
+</ul>
+
 
 
 <%- include("partials/footer") %>
