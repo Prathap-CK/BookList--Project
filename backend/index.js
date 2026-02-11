@@ -34,6 +34,9 @@ app.use(session({
 
 const bookRouter=require('./routes/books');
 app.use('/',bookRouter);
+const apiRouter = require("./routes/api");
+app.use(apiRouter);
+
 
 const authRouter=require("./routes/auth");
 app.use(authRouter);
