@@ -1,35 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+import {useEffect,useState} from "react";
+import "./App.css";
+function App(){
+  const[books,setBooks]=useState([]);
+  useEffect(()=>{
+    fetch("http://localhost:3000/api/books")
+    .then(res =>res.json())
+    .then(data=>setBooks(data))
+    .catch(err=>console.error(err));
+  },[]);
+  return(
+    <div className="container">
+      <h1 className="title">My Book Collection</h1>
+      <div className="grid">
+        {books.map(book=>(
+          <div key={books.id} className="card">
+            <img src={book.cover_url || "https://via.placeholder.com/150"} alt={book.title}/>
+            <div className="card-content">
+              <h3>{book.title}</h3>
+              <p className ="author">by {book.author}></p>
+               <p className="rating">⭐ {book.rating}</p>
+            </div>
+            </div>
+        ))}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+
+  );
+
 }
-
-export default App
+export default App;

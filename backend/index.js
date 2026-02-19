@@ -1,9 +1,16 @@
+const cors = require("cors");
+
 require('dotenv').config();
 const express=require('express');
 const path=require('path');
 const methodOverride=require('method-override');
 
 const app=express();
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true
+}));
+
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(methodOverride('_method'));

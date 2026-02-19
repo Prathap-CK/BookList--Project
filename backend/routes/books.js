@@ -72,6 +72,16 @@ router.get("/my-books", requiredLogin, async (req, res, next) => {
     next(err);
   }
 });
+
+router.get("/api/books", async (req, res) => {
+  try {
+    const result = await db.query("SELECT * FROM books ORDER BY created_at DESC");
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch books" });
+  }
+});
+
 /* ===========================
    CREATE BOOK
 =========================== */
